@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:32:21 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/23 13:08:28 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/23 16:21:45 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,20 @@ typedef struct s_print
 	char		specifier;
 }	t_print;
 
+typedef struct s_pos
+{
+	int			index;
+	int			counter;
+}	t_pos;
+
 /*
 *	From ft_printf.c
 */
 
-void	ft_initialize_print(t_print *print);
-void	ft_get_flag_size(t_print *print, va_list arg, const char *str, int *pos);
-void	ft_handle_flags(t_print *print, va_list arg, const char *str, int *pos);
-int		ft_print_arg(va_list arg, const char *str, int *counter, int *pos);
+void	ft_init_tprint(t_print *print);
+void	ft_flag_size(t_print *print, va_list arg, const char *str, t_pos *pos);
+void	ft_set_flags(t_print *print, va_list arg, const char *str, t_pos *pos);
+int		ft_print_arg(va_list arg, const char *str, t_pos *pos);
 int		ft_printf(const char *format, ...);
 
 /*
@@ -83,7 +89,7 @@ int		ft_printf(const char *format, ...);
 */
 
 int		ft_find_char(const char *str, char c);
-int		ft_atoi(const char *nptr, int *pos);
+int		ft_atoi(const char *nptr, t_pos *pos);
 void	print_struct(t_print print);
 
 #endif
