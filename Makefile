@@ -6,7 +6,7 @@
 #    By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 15:48:42 by lgoncalv          #+#    #+#              #
-#    Updated: 2022/01/22 16:21:06 by lgoncalv         ###   ########.fr        #
+#    Updated: 2022/01/22 20:57:26 by lgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ RMRUN		= rm -f											# DELETE BEFORE DELIVERY
 
 NAME		= libftprintf.a
 
-SRCSMAIN	= main.c ft_printf.c							# DELETE BEFORE DELIVERY
+SRCSMAIN	= main.c										# DELETE BEFORE DELIVERY
 
-SRCS		= ft_printf.c
+SRCS		= ft_printf.c ft_printf_utils.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -44,4 +44,7 @@ re:			fclean all
 rebonus:	fclean bonus
 
 run:														# DELETE BEFORE DELIVERY
-			@$(CC) $(SRCSMAIN) && ./a.out && $(RMRUN) *.out
+			@$(CC) $(SRCSMAIN) $(SRCS) && ./a.out
+
+crun:													# DELETE BEFORE DELIVERY
+			@clear && $(CC) $(SRCSMAIN) $(SRCS) && ./a.out && $(RMRUN) *.out
