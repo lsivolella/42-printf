@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:32:21 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/22 22:13:29 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/23 13:08:28 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 *	Macros
 */
 
-# define ARG_REQUEST	'%'
+# define PERCENT		'%'
 # define MINUS			'-'
 # define ZERO			'0'
 # define PRECISION		'.'
@@ -60,25 +60,30 @@ typedef struct s_print
 	char		flags[4];
 	t_bool		left_justify;
 	t_bool		zero_padding;
-	int			precision;
 	t_bool		hash;
 	t_bool		empty_space;
 	t_bool		explicit_sign;
-	char		specifier;
+	int			precision;
 	int			width;
+	char		specifier;
 }	t_print;
 
 /*
 *	From ft_printf.c
 */
 
+void	ft_initialize_print(t_print *print);
+void	ft_get_flag_size(t_print *print, va_list arg, const char *str, int *pos);
+void	ft_handle_flags(t_print *print, va_list arg, const char *str, int *pos);
+int		ft_print_arg(va_list arg, const char *str, int *counter, int *pos);
 int		ft_printf(const char *format, ...);
 
 /*
 *	From ft_printf_utils.c
 */
 
-void	ft_putchar(char c);
 int		ft_find_char(const char *str, char c);
+int		ft_atoi(const char *nptr, int *pos);
+void	print_struct(t_print print);
 
 #endif

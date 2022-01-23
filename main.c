@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:35:28 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/22 21:44:30 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/23 12:51:23 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void TestTwo()
 
 int main(void)
 {
-	ft_printf("\n*%*.*d*\n", 5, 2, 1);
+	ft_printf("%10+-#0 *.*d", 12, 10, 4);
+	//ft_printf("\n<%*.*d>\n", 5, 2, 1);
 	//ft_printf("*Test %d %d*\n", 5, 5);
 	//TestOne();
 	//TestTwo();
