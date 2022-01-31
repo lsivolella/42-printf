@@ -6,13 +6,13 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:18:27 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/23 16:34:15 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/31 20:17:14 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_init_tprint(t_print *print)
+void	ft_initialize_print(t_print *print)
 {
 	print->left_justify = false;
 	print->zero_padding = false;
@@ -20,104 +20,94 @@ void	ft_init_tprint(t_print *print)
 	print->hash = false;
 	print->width = -1;
 	print->precision = -1;
-	print->specifier = '\0';
+	print->specifier = '0';
 }
 
-void	ft_flag_size(t_print *print, va_list arg, const char *str, t_pos *pos)
+void	ft_get_flag_size(t_print *print, va_list arg, const char *str, int *pos)
 {
 	// HANDLE ARGUMENT IS 0 -> WHAT HAPPENS WHEN WIDTH OR PRECISION ARE 0??
-	if (str[pos->index] == PRECISION)
+	if (str[*pos] == PRECISION)
 	{
-		(pos->index)++;
-		if (str[pos->index] == STAR)
+		(*pos)++;
+		if (str[*pos] == STAR)
 			print->precision = va_arg(arg, int);
-		else if (ft_find_char(DECIMAL, str[pos->index]))
+		else if (ft_find_char(DECIMAL, str[*pos]))
 		{
 			print->precision = ft_atoi(str, pos);
-			(pos->index)--;
+			(*pos)--;
 		}
 	}
 	else
 	{
-		if (str[pos->index] == STAR)
+		if (str[*pos] == STAR)
 			print->width = va_arg(arg, int);
-		else if (ft_find_char(DECIMAL, str[pos->index]))
+		else if (ft_find_char(DECIMAL, str[*pos]))
 		{
 			print->width = ft_atoi(str, pos);
-			(pos->index)--;
+			(*pos)--;
 		}
 	}
 }
 
-void	ft_set_flags(t_print *print, va_list arg, const char *str, t_pos *pos)
+void	ft_handle_flags(t_print *print, va_list arg, const char *str, int *pos)
 {
-	while (!ft_find_char(SPECIFIERS, str[pos->index]) && str[pos->index])
+	while (!ft_find_char(SPECIFIERS, str[*pos]) && str[*pos])
 	{
-		if (str[pos->index] == MINUS)
+		if (str[*pos] == MINUS)
 			print->left_justify = true;
-		else if (str[pos->index] == ZERO)
+		else if (str[*pos] == ZERO)
 			print->zero_padding = true;
-		else if (str[pos->index] == PRECISION
-			|| ft_find_char(DECIMAL, str[pos->index])
-			|| str[pos->index] == STAR)
-			ft_flag_size(print, arg, str, pos);
-		else if (str[pos->index] == HASH)
+		else if (str[*pos] == PRECISION
+			|| ft_find_char(DECIMAL, str[*pos])
+			|| str[*pos] == STAR)
+			ft_get_flag_size(print, arg, str, pos);
+		else if (str[*pos] == HASH)
 			print->hash = true;
-		else if (str[pos->index] == SPACE)
+		else if (str[*pos] == SPACE)
 			print->empty_space = true;
-		else if (str[pos->index] == PLUS)
+		else if (str[*pos] == PLUS)
 			print->explicit_sign = true;
-		(pos->index)++;
-		if (str[pos->index] == PERCENT)
+		(*pos)++;
+		if (str[*pos] == PERCENT)
 			print->specifier = PERCENT;
 	}
 }
 
-int	ft_print_arg(va_list arg, const char *str, t_pos *pos)
+int	ft_print_arg(va_list arg, const char *str, int *counter, int *pos)
 {
 	t_print	*print;
 
 	print = (t_print *)malloc(sizeof(t_print));
 	if (!print)
 		return (-1);
-	ft_init_tprint(print);
-	ft_set_flags(print, arg, str, pos);
+	ft_initialize_print(print);
+	ft_handle_flags(print, arg, str, pos);
 	// ft_handle_specifier_print -> coordinates printing
 	print_struct(*print);
 	free(print);
 	return (1);
 }
 
-void	ft_init_tpos(t_pos *pos)
-{
-	pos->index = -1;
-	pos->counter = 0;
-}
-
 int	ft_printf(const char *format, ...)
 {
-	int		ret;
-	va_list	arg;
-	t_pos	*pos;
+	va_list		arg;
+	int			counter;
+	int			pos;
 
-	ret = 0;
+	counter = 0;
+	pos = -1;
 	va_start(arg, format);
-	pos = (t_pos *)malloc(sizeof(t_pos));
-	if (!pos)
-		return (-1);
-	ft_init_tpos(pos);
-	while (format[++pos->index])
+	while (format[++pos])
 	{
-		if (format[pos->index] != PERCENT)
-			pos->counter += write(1, &format[pos->index], 1);
+		if (format[pos] != PERCENT)
+			counter += write(1, &format[pos], 1);
 		else
 		{
-			ret = pos->index++;
-			if (ft_print_arg(arg, format, pos) < 0)
+			pos++;
+			if (ft_print_arg(arg, format, &counter, &pos) < 0)
 				return (-1);
 		}
 	}
 	va_end(arg);
-	free(pos);
-	return (ret);
+	return (counter);
 }

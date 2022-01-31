@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:27:59 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/23 16:21:12 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/23 12:45:57 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	ft_find_char(const char *str, char c)
 	return (0);
 }
 
-int	ft_atoi(const char *nptr, t_pos *pos)
+int	ft_atoi(const char *nptr, int *pos)
 {
 	int	nbr;
 
 	nbr = 0;
-	while (nptr[pos->index] > 47 && nptr[pos->index] < 58 && nptr[pos->index])
+	while (nptr[*pos] > 47 && nptr[*pos] < 58 && nptr[*pos])
 	{
-		nbr = nbr * 10 + nptr[pos->index] - 48;
-		(pos->index)++;
+		nbr = nbr * 10 + nptr[*pos] - 48;
+		(*pos)++;
 	}
 	return (nbr);
 }
