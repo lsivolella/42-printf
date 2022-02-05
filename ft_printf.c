@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:18:27 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/31 20:17:14 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:59:43 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,30 @@
 
 void	ft_initialize_print(t_print *print)
 {
+	print->flag_error = false;
 	print->left_justify = false;
 	print->zero_padding = false;
 	print->explicit_sign = false;
 	print->hash = false;
-	print->width = -1;
-	print->precision = -1;
+	print->width = 0;
+	print->precision = 0;
 	print->specifier = '0';
 }
 
 void	ft_get_flag_size(t_print *print, va_list arg, const char *str, int *pos)
 {
-	// HANDLE ARGUMENT IS 0 -> WHAT HAPPENS WHEN WIDTH OR PRECISION ARE 0??
 	if (str[*pos] == PRECISION)
 	{
 		(*pos)++;
 		if (str[*pos] == STAR)
 			print->precision = va_arg(arg, int);
-		else if (ft_find_char(DECIMAL, str[*pos]))
+		else if (ft_find_char(DECIMAL, str[*pos]) || ft_isalpha(str[*pos]))
 		{
-			print->precision = ft_atoi(str, pos);
+			print->precision = ft_atoi_print(print ,str, pos);
 			(*pos)--;
 		}
+		else if (str[*pos] == MINUS || str[*pos] == PLUS)
+			print->flag_error = true;
 	}
 	else
 	{
@@ -43,18 +45,32 @@ void	ft_get_flag_size(t_print *print, va_list arg, const char *str, int *pos)
 			print->width = va_arg(arg, int);
 		else if (ft_find_char(DECIMAL, str[*pos]))
 		{
-			print->width = ft_atoi(str, pos);
+			print->width = ft_atoi_print(print, str, pos);
 			(*pos)--;
 		}
+	}
+	ft_treat_width(print);
+}
+
+void	ft_treat_width(t_print *print)
+{
+	if (print->flag_error)
+		return;
+	if (print->width < 0)
+	{
+		print->left_justify = true;
+		print->width *= -1;
 	}
 }
 
 void	ft_handle_flags(t_print *print, va_list arg, const char *str, int *pos)
 {
-	while (!ft_find_char(SPECIFIERS, str[*pos]) && str[*pos])
+	while (!print->flag_error && str[*pos] && !ft_find_char(SPECIFIERS, str[*pos]))
 	{
 		if (str[*pos] == MINUS)
 			print->left_justify = true;
+		else if (str[*pos] == PLUS)
+			print->explicit_sign = true;
 		else if (str[*pos] == ZERO)
 			print->zero_padding = true;
 		else if (str[*pos] == PRECISION
@@ -65,12 +81,10 @@ void	ft_handle_flags(t_print *print, va_list arg, const char *str, int *pos)
 			print->hash = true;
 		else if (str[*pos] == SPACE)
 			print->empty_space = true;
-		else if (str[*pos] == PLUS)
-			print->explicit_sign = true;
 		(*pos)++;
-		if (str[*pos] == PERCENT)
-			print->specifier = PERCENT;
 	}
+	if (!print->flag_error && str[*pos] && ft_find_char(SPECIFIERS, str[*pos]))
+		print->specifier = str[*pos];
 }
 
 int	ft_print_arg(va_list arg, const char *str, int *counter, int *pos)
@@ -82,7 +96,9 @@ int	ft_print_arg(va_list arg, const char *str, int *counter, int *pos)
 		return (-1);
 	ft_initialize_print(print);
 	ft_handle_flags(print, arg, str, pos);
-	// ft_handle_specifier_print -> coordinates printing
+	if (print->flag_error || print->specifier == '0')
+		return (-1);
+	ft_specifiers(print, arg, counter);
 	print_struct(*print);
 	free(print);
 	return (1);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:27:59 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/01/23 12:45:57 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:19:10 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,23 @@ int	ft_find_char(const char *str, char c)
 	return (0);
 }
 
-int	ft_atoi(const char *nptr, int *pos)
+int	ft_isalpha(int c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
+}
+
+int	ft_atoi_print(t_print *print, const char *nptr, int *pos)
 {
 	int	nbr;
 
 	nbr = 0;
+	if (nptr[*pos] == '-' || nptr[*pos] == '+')
+	{
+		print->flag_error = true;
+		return (nbr);
+	}
 	while (nptr[*pos] > 47 && nptr[*pos] < 58 && nptr[*pos])
 	{
 		nbr = nbr * 10 + nptr[*pos] - 48;

@@ -6,7 +6,7 @@
 #    By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 15:48:42 by lgoncalv          #+#    #+#              #
-#    Updated: 2022/01/22 20:57:26 by lgoncalv         ###   ########.fr        #
+#    Updated: 2022/01/31 20:46:01 by lgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME		= libftprintf.a
 
 SRCSMAIN	= main.c										# DELETE BEFORE DELIVERY
 
-SRCS		= ft_printf.c ft_printf_utils.c
+SRCS		= ft_printf.c ft_utils.c ft_print_s.c
 
 OBJS		= $(SRCS:.c=.o)
 
