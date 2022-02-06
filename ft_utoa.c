@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:57:11 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/06 15:44:22 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:26:29 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 static size_t	ft_get_size(unsigned long long int n, int b_length)
 {
-	unsigned long long int num;
-	size_t	size;
+	unsigned long long int	num;
+	size_t					size;
 
 	num = n;
 	size = 1;
-	while (num /= b_length)
+	while (num)
+	{
+		num /= b_length;
 		size++;
+	}
 	return (size);
 }
 
 char	*ft_utoa(t_int *n, char *base)
 {
 	unsigned long long int	num;
-	char	*nbr;
-	size_t	size;
-	int		b_length;
+	char					*nbr;
+	size_t					size;
+	int						b_length;
 
 	num = n->value;
 	b_length = ft_strlen(base);

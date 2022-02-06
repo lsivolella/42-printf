@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:18:27 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 22:46:16 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/06 17:21:24 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	ft_print_arg(va_list arg, const char *str, int *counter, int *pos)
 	if (print->flag_error || print->specifier == '0')
 		return (-1);
 	ret = ft_specifiers(print, arg, counter);
-	//print_struct(*print);
 	free(print);
 	return (ret);
 }
