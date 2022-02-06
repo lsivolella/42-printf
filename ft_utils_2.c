@@ -1,54 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_utils_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:27:59 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 12:19:10 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/05 20:56:48 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	ft_find_char(const char *str, char c)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == c)
-			return (1);
-	}
-	return (0);
-}
-
-int	ft_isalpha(int c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	return (0);
-}
-
-int	ft_atoi_print(t_print *print, const char *nptr, int *pos)
-{
-	int	nbr;
-
-	nbr = 0;
-	if (nptr[*pos] == '-' || nptr[*pos] == '+')
-	{
-		print->flag_error = true;
-		return (nbr);
-	}
-	while (nptr[*pos] > 47 && nptr[*pos] < 58 && nptr[*pos])
-	{
-		nbr = nbr * 10 + nptr[*pos] - 48;
-		(*pos)++;
-	}
-	return (nbr);
-}
 
 void	print_struct(t_print print)
 {

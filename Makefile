@@ -6,7 +6,7 @@
 #    By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 15:48:42 by lgoncalv          #+#    #+#              #
-#    Updated: 2022/01/31 20:46:01 by lgoncalv         ###   ########.fr        #
+#    Updated: 2022/02/05 22:49:23 by lgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,20 @@ RMRUN		= rm -f											# DELETE BEFORE DELIVERY
 
 NAME		= libftprintf.a
 
-SRCSMAIN	= main.c										# DELETE BEFORE DELIVERY
+SRCSMAIN	= main.c \
+			tests_percentage.c \
+			tests_char.c \
+			tests_string.c \
+			tests_decimal.c \
+			tests_integer.c \
+			tests_u_integer.c \
+			tests_mixed.c				# DELETE BEFORE DELIVERY
 
-SRCS		= ft_printf.c ft_utils.c ft_print_s.c
+SRCS		= ft_printf.c \
+			ft_utils_1.c \
+			ft_utils_2.c \
+			ft_itoa.c \
+			ft_specifiers.c
 
 OBJS		= $(SRCS:.c=.o)
 

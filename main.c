@@ -6,13 +6,11 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:35:28 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 12:56:27 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/05 23:01:36 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"ft_printf.h"
-
-#define		LINE_SEPARATOR "\n-----------------------------------------------------------\n"
 
 void TestOne()
 {
@@ -52,6 +50,30 @@ void TestTwo()
 
 int main(void)
 {
+	// all_percent_tests();
+	// all_char_tests();
+	// all_string_tests();
+	// all_decimal_tests();
+	// all_integer_tests();
+	all_u_integer_tests();
+	// all_mixed_tests();
+
+	// char *string;
+	// int width;
+	// int precision;
+
+	// string = "Test";
+	// width = -10;
+	// precision = 3;
+	//printf("<%*.*s>\n", width, precision, string);
+	//ft_printf("<%*.*s>\n", width, precision, string);
+	
+
+
+	// printf("<%2c>\n", 'a');
+	// printf("<%-2c>\n", 'a');
+	// ft_printf("<%-2c>\n", 'a');
+	
 	// to test during flag captures:
 	// precision:
 	// negative precision value as argument -> flag formatting error! (done!)
@@ -66,14 +88,6 @@ int main(void)
 	// 0 precision value as parameter -> means no precision (done!)
 	// null precision value as parameter -> not possible with compiler flags (done!)
 	
-	int testArg;
-	int testInt = 5;
-	float testFloat = -5.5f;
-	
-	printf("%.*f", testArg, testFloat);
-	//printf("%.*d", testArg, testInt);
-	//printf("%.*d", testArg, testInt);
-	
 	// width:
 	// negative width value as argument -> means left-justify (done!)
 	// positive width value as argument -> means explicit_sign (done!)
@@ -86,6 +100,7 @@ int main(void)
 	// positive width value as parameter -> no special meaning (done!)
 	// 0 width value as parameter -> means no minimum width
 	// null width value as parameter -> not possible with compiler flags (done!)
+
 
 	// ft_printf("Test 1: %c\n", 'c');
 	// ft_printf("Test 2: %s\n", "string");
