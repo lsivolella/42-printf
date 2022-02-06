@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:59:18 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 22:34:03 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:52:50 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	string_test_1(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 1 - String variable.\n";
 	str = "Lucas";
@@ -29,8 +29,8 @@ void	string_test_1(void)
 
 void	string_test_2(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 2 - String variable with text before.\n";
 	str = "Lucas";
@@ -44,8 +44,8 @@ void	string_test_2(void)
 
 void	string_test_3(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 3 - String variable with text afterwards.\n";
 	str = "Lucas";
@@ -59,8 +59,8 @@ void	string_test_3(void)
 
 void	string_test_4(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 4 - String variable right-justified width 10 as string.\n";
 	str = "Lucas";
@@ -74,8 +74,8 @@ void	string_test_4(void)
 
 void	string_test_5(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 	int		width;
 
 	testName = "Test 5 - String variable right-justified width 10 as variable.\n";
@@ -91,8 +91,8 @@ void	string_test_5(void)
 
 void	string_test_6(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 6 - String variable left-justified width 2 as string.\n";
 	str = "Lucas";
@@ -106,8 +106,8 @@ void	string_test_6(void)
 
 void	string_test_7(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 	int		width;
 
 	testName = "Test 7 - String variable left-justified width 10 as variable.\n";
@@ -123,8 +123,8 @@ void	string_test_7(void)
 
 void	string_test_8(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 8 - String variable left-justified precision 2 as string.\n";
 	str = "Lucas";
@@ -138,8 +138,8 @@ void	string_test_8(void)
 
 void	string_test_9(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 	int		precision;
 
 	testName = "Test 9 - String variable left-justified precision 2 as variable.\n";
@@ -155,8 +155,8 @@ void	string_test_9(void)
 
 void	string_test_10(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 10 - String variable right-justified precision 2 as string.\n";
 	str = "Lucas";
@@ -170,8 +170,8 @@ void	string_test_10(void)
 
 void	string_test_11(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 	int		precision;
 
 	testName = "Test 11 - String variable right-justified precision 2 as variable.\n";
@@ -187,8 +187,8 @@ void	string_test_11(void)
 
 void	string_test_12(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 12 - String variable left-justified width 10 and precision 2 as string.\n";
 	str = "Lucas";
@@ -202,8 +202,8 @@ void	string_test_12(void)
 
 void	string_test_13(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 
 	testName = "Test 13 - String variable right-justified width 10 and precision 2 as string.\n";
 	str = "Lucas";
@@ -217,8 +217,8 @@ void	string_test_13(void)
 
 void	string_test_14(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 	int		width;
 	int		precision;
 
@@ -236,8 +236,8 @@ void	string_test_14(void)
 
 void	string_test_15(void)
 {
-	char*	testName;
-	char*	str;
+	char	*testName;
+	char	*str;
 	int		width;
 	int		precision;
 
@@ -255,15 +255,30 @@ void	string_test_15(void)
 
 void	string_test_16(void)
 {
-	char*	testName;
+	char	*testName;
 
 	testName = "Test 16 - Null string.\n";
 	printf("%s", LINE_SEPARATOR);
 	printf("%s", testName);
 	printf("\n-> FT Behavior\n");
-	printf("\nReturn Size: %d\n", ft_printf("< %s >", NULL));
+	printf("\nReturn Size: %d\n", ft_printf("<%s>", NULL));
 	printf("\n-> Original Behavior\n");
-	printf("\nReturn Size: %d\n", printf("< %s >", "(null)"));
+	printf("\nReturn Size: %d\n", printf("<%s>", "(null)"));
+}
+
+void	string_test_17(void)
+{
+	char	*testName;
+	char	*str;
+
+	str = NULL;
+	testName = "Test 17 - Null string with precision as argument.\n";
+	printf("%s", LINE_SEPARATOR);
+	printf("%s", testName);
+	printf("\n-> FT Behavior\n");
+	printf("\nReturn Size: %d\n", ft_printf("<%.1s>", str));
+	printf("\n-> Original Behavior\n");
+	printf("\nReturn Size: %d\n", printf("<%.1s>", str));
 }
 
 void	all_string_tests(void)
@@ -284,4 +299,5 @@ void	all_string_tests(void)
 	string_test_14();
 	string_test_15();
 	string_test_16();
+	string_test_17();
 }

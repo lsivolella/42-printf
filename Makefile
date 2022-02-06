@@ -6,7 +6,7 @@
 #    By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 15:48:42 by lgoncalv          #+#    #+#              #
-#    Updated: 2022/02/05 22:49:23 by lgoncalv         ###   ########.fr        #
+#    Updated: 2022/02/06 16:22:16 by lgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,14 @@ SRCSMAIN	= main.c \
 			tests_decimal.c \
 			tests_integer.c \
 			tests_u_integer.c \
+			tests_hexa.c \
+			tests_pointer.c \
 			tests_mixed.c				# DELETE BEFORE DELIVERY
 
 SRCS		= ft_printf.c \
 			ft_utils_1.c \
 			ft_utils_2.c \
-			ft_itoa.c \
+			ft_utoa.c \
 			ft_specifiers.c
 
 OBJS		= $(SRCS:.c=.o)

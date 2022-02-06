@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:45:41 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 23:01:45 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/06 16:59:01 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 int	ft_specifiers(t_print *print, va_list arg, int *counter)
 {
-	// improve return of print functions
-	// need to ignore non-required specifiers and jump arg
-	// ex: alguem enviou um double 'f' para imprimir. Devo ignora-lo e seguir com o programa
+	// remove returns for mandatory delivery?
 	if (print->specifier == '%')
-		ft_print_char(print, '%', counter);
+		ft_print_c(print, '%', counter);
 	else if (print->specifier == 'c')
-		ft_print_char(print, va_arg(arg, int), counter);
+		ft_print_c(print, va_arg(arg, int), counter);
 	else if (print->specifier == 's')
-		return (ft_print_string(print, va_arg(arg, char *), counter));
+		return (ft_print_s(print, va_arg(arg, char *), counter));
 	else if (print->specifier == 'd' || print->specifier == 'i')
-		return (ft_print_integer(print, va_arg(arg, int), counter));
+		return (ft_print_di(va_arg(arg, int), counter));
 	else if (print->specifier == 'u')
-		return (ft_print_u_integer(print, va_arg(arg, unsigned int), counter));
+		return (ft_print_uxX(va_arg(arg, unsigned int), counter, DECIMAL));
 	else if (print->specifier == 'p')
-		printf("Found p specifier");
+		return (ft_print_p(va_arg(arg, unsigned long int), counter));
 	else if (print->specifier == 'x')
-		printf("Found x specifier");
+		return (ft_print_uxX(va_arg(arg, unsigned int), counter, L_HEXA));
 	else if (print->specifier == 'X')
-		printf("Found X specifier");
+		return (ft_print_uxX(va_arg(arg, unsigned int), counter, U_HEXA));
 	return (1);
 }
 
@@ -45,7 +43,7 @@ void	ft_print_padding(t_print *print, int *counter)
 		*counter += write(1, " ", 1);
 }
 
-int	ft_print_char(t_print *print, int nbr, int *counter)
+int	ft_print_c(t_print *print, int nbr, int *counter)
 {
 	if (print->specifier == '%')
 		*counter += write(1, &nbr, 1);
@@ -66,12 +64,16 @@ int	ft_print_char(t_print *print, int nbr, int *counter)
 	return (*counter);
 }
 
-int	ft_print_string(t_print *print, char *str, int *counter)
+int	ft_print_s(t_print *print, char *str, int *counter)
 {
 	int	str_len;
 
 	if (!str)
+	{
 		str = "(null)";
+		if (print->do_pres && print->precision < 6)
+			print->precision = 0;
+	}
 	str_len = ft_strlen(str);
 	if (!print->do_pres || (print->do_pres && print->precision > str_len))
 		print->precision = str_len;
@@ -90,28 +92,64 @@ int	ft_print_string(t_print *print, char *str, int *counter)
 	return (*counter);
 }
 
-int	ft_print_integer(t_print *print, int nbr, int *counter)
+int	ft_print_di(int nbr, int *counter)
 {
+	t_int	*num;
 	char	*str;
 	int		str_len;
 
-	str = ft_itoa(nbr);
+	num = (t_int *)malloc(sizeof(t_int));
+	num->positive = nbr >= 0;
+	if (nbr < 0)
+		num->value = -(unsigned long long int)nbr;
+	else
+		num->value = (unsigned long long int)nbr;
+	str = ft_utoa(num, DECIMAL);
 	str_len = ft_strlen(str);
-	print->precision = str_len;
+	if (!num->positive)
+		*counter += write(1, "-", 1);
 	*counter += write(1, str, str_len);
 	free(str);
+	free(num);
 	return (*counter);
 }
 
-int	ft_print_u_integer(t_print *print, unsigned int nbr, int *counter)
+int	ft_print_uxX(unsigned int nbr, int *counter, char *base)
 {
+	t_int	*num;
 	char	*str;
 	int		str_len;
 
-	str = ft_utoa(nbr);
+	num = (t_int *)malloc(sizeof(t_int));
+	num->positive = TRUE;
+	num->value = nbr;
+	str = ft_utoa(num, base);
 	str_len = ft_strlen(str);
-	print->precision = str_len;
 	*counter += write(1, str, str_len);
 	free(str);
+	free(num);
+	return (*counter);
+}
+
+int	ft_print_p(unsigned long int nbr, int *counter)
+{
+	t_int	*num;
+	char	*str;
+	int		str_len;
+
+	if (!nbr)
+	{
+		*counter += write(1, "(nil)", 5);
+		return (*counter);
+	}
+	num = (t_int *)malloc(sizeof(t_int));
+	num->positive = TRUE;
+	num->value = nbr;
+	str = ft_utoa(num, L_HEXA);
+	str_len = ft_strlen(str);
+	*counter += write(1, "0x", 2);
+	*counter += write(1, str, str_len);
+	free(str);
+	free(num);
 	return (*counter);
 }

@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:59:18 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 22:59:42 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:59:42 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	u_integer_test_4(void)
 	printf("%s", LINE_SEPARATOR);
 	printf("%s", testName);
 	printf("\n-> FT Behavior\n");
+	printf("\nReturn Size: %d\n", ft_printf("<%u>", nbr1));
 	printf("\nReturn Size: %d\n", ft_printf("<%u>", nbr1));
 	printf("\n-> Original Behavior\n");
 	printf("\nReturn Size: %d\n", printf("<%u>", nbr1));

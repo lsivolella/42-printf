@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:27:59 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/05 20:32:56 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:50:02 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_initialize_print(t_print *print)
 	print->left_justify = FALSE;
 	print->zero_padding = FALSE;
 	print->explicit_sign = FALSE;
-	print->do_wid = FALSE;
 	print->do_pres = FALSE;
 	print->hash = FALSE;
 	print->width = 0;
