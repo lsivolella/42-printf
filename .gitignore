@@ -1,7 +1,2 @@
-printfTester/
-ft_printf_tester/
 tests/
-main.c
-tests_*
-Makefile_original
-ft_printf.h_original
+sources/main.c

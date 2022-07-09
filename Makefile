@@ -6,40 +6,60 @@
 #    By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/22 15:48:42 by lgoncalv          #+#    #+#              #
-#    Updated: 2022/02/06 17:27:58 by lgoncalv         ###   ########.fr        #
+#    Updated: 2022/07/09 12:17:51 by lgoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
-RM			= /bin/rm -f
+# COMPILER
+CC				= gcc
 
-NAME		= libftprintf.a
+# FLAGS
+CFLAGS			= -Wall -Wextra -Werror
+INCLUDES		= -I $(INCLUDES_PATH)
 
-SRCS		= ft_printf.c \
-			ft_utils_1.c \
-			ft_utils_2.c \
-			ft_utoa.c \
-			ft_specifiers.c
+# PATHS
+INCLUDES_PATH	= ./includes
+SRCS_PATH		= ./sources
+OBJS_PATH		= ./objects
 
-OBJS		= $(SRCS:.c=.o)
+# COMMANDS
+RM				= /bin/rm -f
 
-.c.o:
-			@$(CC) -c $< -o $(<:.c=.o)
+# NAMES
+NAME			= libftprintf.a
+INTRO			= LIBFTPRINTF
 
-all:		$(NAME)
+# SOURCES
+SRCS			= ft_printf.c\
+				ft_specifiers_1.c\
+				ft_specifiers_2.c\
+				ft_utils_1.c\
+				ft_utoa.c\
+
+SRCS			:= $(addprefix $(SRCS_PATH)/,$(SRCS))
+
+# OBJECTS
+OBJS			= $(subst $(SRCS_PATH),$(OBJS_PATH),$(SRCS:%.c=%.o))
+
+# PATTERN RULE
+$(OBJS_PATH)/%.o : $(SRCS_PATH)/%.c
+	@mkdir -p $(OBJS_PATH)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+all:	$(NAME)
 
 $(NAME):	$(OBJS)
-			@ar -rcs $(NAME) $(OBJS)
-
-bonus:		all
+	@ar -rsc $(NAME) $(OBJS)
+	@echo "[$(INTRO)] Library [$(NAME)] created!"
 
 clean:
-			@$(RM) $(OBJS)
+	@$(RM) $(OBJS)
+	@echo "[$(INTRO)] Objects removed!"
 
-fclean:		clean
-			@$(RM) $(NAME)
+fclean:	clean
+	@$(RM) $(NAME)
+	@echo "[$(INTRO)] Library [$(NAME)] removed!"
 
-re:			fclean all
+re:	fclean all
 
-rebonus:	fclean bonus
+.PHONY: all clean fclean re
