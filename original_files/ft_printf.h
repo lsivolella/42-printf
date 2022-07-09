@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 15:32:21 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/06 16:49:28 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/07/09 12:40:38 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int		ft_print_p(unsigned long int nbr, int *counter);
 */
 
 int		ft_find_char(const char *str, char c);
-int		ft_isalpha(int c);
+int		ftp_isalpha(int c);
 int		ft_atoi_print(t_print *print, const char *nptr, int *pos);
-size_t	ft_strlen(const char *s);
+size_t	ftp_strlen(const char *s);
 void	ft_initialize_print(t_print *print);
 
 /*

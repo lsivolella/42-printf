@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 20:45:41 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/06 17:23:40 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/07/09 12:40:38 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_print_s(t_print *print, char *str, int *counter)
 		if (print->do_pres && print->precision < 6)
 			print->precision = 0;
 	}
-	str_len = ft_strlen(str);
+	str_len = ftp_strlen(str);
 	if (!print->do_pres || (print->do_pres && print->precision > str_len))
 		print->precision = str_len;
 	if (print->width > 0 && print->width < str_len)
@@ -74,7 +74,7 @@ int	ft_print_di(int nbr, int *counter)
 	else
 		num->value = (unsigned long long int)nbr;
 	str = ft_utoa(num, DECIMAL);
-	str_len = ft_strlen(str);
+	str_len = ftp_strlen(str);
 	if (!num->positive)
 		*counter += write(1, "-", 1);
 	*counter += write(1, str, str_len);
@@ -93,7 +93,7 @@ int	ft_print_uxX(unsigned int nbr, int *counter, char *base)
 	num->positive = TRUE;
 	num->value = nbr;
 	str = ft_utoa(num, base);
-	str_len = ft_strlen(str);
+	str_len = ftp_strlen(str);
 	*counter += write(1, str, str_len);
 	free(str);
 	free(num);
@@ -115,7 +115,7 @@ int	ft_print_p(unsigned long int nbr, int *counter)
 	num->positive = TRUE;
 	num->value = nbr;
 	str = ft_utoa(num, L_HEXA);
-	str_len = ft_strlen(str);
+	str_len = ftp_strlen(str);
 	*counter += write(1, "0x", 2);
 	*counter += write(1, str, str_len);
 	free(str);

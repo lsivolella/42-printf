@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:27:59 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/06 15:50:02 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/07/09 12:40:38 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_find_char(const char *str, char c)
 	return (0);
 }
 
-int	ft_isalpha(int c)
+int	ftp_isalpha(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
@@ -50,7 +50,7 @@ int	ft_atoi_print(t_print *print, const char *nptr, int *pos)
 	return (nbr);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ftp_strlen(const char *s)
 {
 	unsigned int	i;
 

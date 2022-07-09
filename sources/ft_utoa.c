@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 20:57:11 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/06 17:26:29 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/07/09 12:40:38 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_utoa(t_int *n, char *base)
 	int						b_length;
 
 	num = n->value;
-	b_length = ft_strlen(base);
+	b_length = ftp_strlen(base);
 	size = ft_get_size(num, b_length);
 	nbr = (char *)malloc((size + 1) * sizeof(char));
 	if (!nbr)

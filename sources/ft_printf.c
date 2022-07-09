@@ -6,7 +6,7 @@
 /*   By: lgoncalv <lgoncalv@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 16:18:27 by lgoncalv          #+#    #+#             */
-/*   Updated: 2022/02/06 17:21:24 by lgoncalv         ###   ########.fr       */
+/*   Updated: 2022/07/09 12:40:25 by lgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_precis_flag(t_print *print, va_list arg, const char *str, int *pos)
 	(*pos)++;
 	if (str[*pos] == STAR)
 		value = va_arg(arg, int);
-	else if (ft_find_char(DECIMAL, str[*pos]) || ft_isalpha(str[*pos]))
+	else if (ft_find_char(DECIMAL, str[*pos]) || ftp_isalpha(str[*pos]))
 	{
 		value = ft_atoi_print(print, str, pos);
 		(*pos)--;
